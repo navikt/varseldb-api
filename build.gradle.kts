@@ -18,7 +18,7 @@ tasks.withType<KotlinCompile> {
 repositories {
     // Use jcenter for resolving your dependencies.
     // You can declare any Maven/Ivy/file repository here.
-    jcenter()
+    mavenCentral()
     maven("https://packages.confluent.io/maven")
     maven("https://jitpack.io")
     mavenLocal()
@@ -61,7 +61,7 @@ dependencies {
 }
 
 application {
-    mainClassName = "io.ktor.server.netty.EngineMain"
+    mainClass.set("io.ktor.server.netty.EngineMain")
 }
 
 tasks {
@@ -78,16 +78,14 @@ tasks {
 
         environment("CORS_ALLOWED_ORIGINS", "localhost:9002")
 
-        environment("LOGINSERVICE_IDPORTEN_DISCOVERY_URL", "http://localhost:9000/.well-known/openid-configuration")
-        environment("LOGINSERVICE_IDPORTEN_AUDIENCE", "stubOidcClient")
         environment("OIDC_CLAIM_CONTAINING_THE_IDENTITY", "pid")
-        
+
         environment("NAIS_CLUSTER_NAME", "dev-sbs")
         environment("NAIS_NAMESPACE", "personbruker")
         environment("SENSU_HOST", "stub")
         environment("SENSU_PORT", "")
 
-        main = application.mainClassName
+        mainClass.set(application.mainClass)
         classpath = sourceSets["main"].runtimeClasspath
     }
 }

@@ -1,0 +1,33 @@
+apiVersion: "nais.io/v1alpha1"
+kind: "Application"
+metadata:
+  name: varseldb-api
+  namespace: personbruker
+  labels:
+    team: personbruker
+spec:
+  image: {{version}}
+  port: 8080
+  liveness:
+    path: /varseldb-api/internal/isAlive
+    initialDelay: 10
+  readiness:
+    path: /varseldb-api/internal/isReady
+    initialDelay: 10
+  prometheus:
+    enabled: true
+    path: /varseldb-api/internal/metrics
+  replicas:
+    min: 2
+    max: 4
+  ingresses:
+    - "https://dev.intern.nav.no/varseldb-api"
+  vault:
+    enabled: true
+  resources:
+    limits:
+      cpu: "3"
+      memory: 768Mi
+    requests:
+      cpu: "500m"
+      memory: 580Mi
