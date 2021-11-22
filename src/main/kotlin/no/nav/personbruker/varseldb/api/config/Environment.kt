@@ -1,8 +1,10 @@
 package no.nav.personbruker.varseldb.api.config
 
-class Environment
+import no.nav.personbruker.dittnav.common.util.config.StringEnvVar.getEnvVar
 
-fun getEnvVar(varName: String): String {
-    return System.getenv(varName)
-        ?: throw IllegalArgumentException("Appen kan ikke starte uten av miljøvariabelen $varName er satt.")
-}
+data class Environment(val dbHost: String = getEnvVar("DB_HOST"),
+                       val dbName: String = getEnvVar("DB_NAME"),
+                       val dbUser: String = getEnvVar("DB_USER"),
+                       val dbPassword: String = getEnvVar("DB_PASSWORD"),
+                       val dbUrl: String = "jdbc:oracle:thin:@$dbHost/$dbName"
+)

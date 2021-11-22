@@ -25,6 +25,8 @@ repositories {
 }
 
 dependencies {
+    implementation(DittNAV.Common.utils)
+    implementation(Hikari.cp)
     implementation(Kotlinx.coroutines)
     implementation(Kotlinx.htmlJvm)
     implementation(Ktor.auth)
@@ -41,6 +43,8 @@ dependencies {
     implementation(Prometheus.hotspot)
     implementation(Prometheus.logback)
     implementation(Tms.KtorTokenSupport.azureValidation)
+
+    runtimeOnly("com.oracle.ojdbc:ojdbc10:19.3.0.0")
 
 
     testImplementation(Junit.api)

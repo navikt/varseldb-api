@@ -2,6 +2,19 @@
  * Anbefalte versjoner av tredjepartsbiblioteker.
  */
 
+object DittNAV {
+    object Common {
+        private const val version = "2021.05.18-12.42-9ba5c329c21d"
+        private const val groupId = "com.github.navikt.dittnav-common-lib"
+
+        const val utils = "$groupId:dittnav-common-utils:$version"
+    }
+}
+
+object Hikari {
+    private const val version = "5.0.0"
+    const val cp = "com.zaxxer:HikariCP:$version"
+}
 
 object Junit {
     private const val version = "5.4.1"

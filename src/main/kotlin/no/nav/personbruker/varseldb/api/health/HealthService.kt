@@ -5,6 +5,8 @@ import no.nav.personbruker.varseldb.api.config.ApplicationContext
 class HealthService(private val applicationContext: ApplicationContext) {
 
     suspend fun getHealthChecks(): List<HealthStatus> {
-        return emptyList()
+        return listOf(
+            applicationContext.database.status()
+        )
     }
 }
