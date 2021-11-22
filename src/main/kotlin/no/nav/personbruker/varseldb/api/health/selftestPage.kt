@@ -5,8 +5,6 @@ import io.ktor.html.*
 import io.ktor.http.*
 import kotlinx.coroutines.coroutineScope
 import kotlinx.html.*
-import no.nav.personbruker.varseldb.api.config.Environment
-import no.nav.personbruker.varseldb.api.config.HttpClientBuilder
 
 suspend fun ApplicationCall.buildSelftestPage(healthService: HealthService) = coroutineScope {
 
