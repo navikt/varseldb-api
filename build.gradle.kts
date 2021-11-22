@@ -40,6 +40,7 @@ dependencies {
     implementation(Prometheus.common)
     implementation(Prometheus.hotspot)
     implementation(Prometheus.logback)
+    implementation(Tms.KtorTokenSupport.azureValidation)
 
 
     testImplementation(Junit.api)
@@ -47,11 +48,7 @@ dependencies {
     testImplementation(Ktor.clientMockJvm)
     testImplementation(Kluent.kluent)
     testImplementation(Mockk.mockk)
-    testImplementation(Jjwt.api)
 
-    testRuntimeOnly(Bouncycastle.bcprovJdk15on)
-    testRuntimeOnly(Jjwt.impl)
-    testRuntimeOnly(Jjwt.jackson)
     testRuntimeOnly(Junit.engine)
 }
 
