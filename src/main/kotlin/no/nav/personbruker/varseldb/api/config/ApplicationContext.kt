@@ -9,7 +9,7 @@ class ApplicationContext {
     private val environment = Environment()
 
     val database: Database = OracleDatabase(environment)
-    val varselService = VarselService()
+    val varselService = VarselService(database)
 
     val healthService = HealthService(this)
 

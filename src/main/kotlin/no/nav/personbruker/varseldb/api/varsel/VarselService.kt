@@ -1,8 +1,23 @@
 package no.nav.personbruker.varseldb.api.varsel
 
-class VarselService(
-) {
+import no.nav.personbruker.varseldb.api.common.database.Database
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
-    fun createVarsel(varsel: Varsel) {
+class VarselService(private val database: Database) {
+
+    private val log: Logger = LoggerFactory.getLogger(VarselService::class.java)
+
+    suspend fun createVarsel(varsel: Varsel) {
+        val dbQuery = database.dbQuery {
+            getVarselByVarselId(varsel.varselId)
+        }
+        if(dbQuery != null) {
+            database.dbQuery {
+                createVarsel(varsel)
+            }
+        } else {
+            log.warn("Varsel med varsel-id: ${varsel.varselId} finnes allerede i databasen. Varselet blir ikke lagret.")
+        }
     }
 }

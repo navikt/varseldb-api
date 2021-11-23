@@ -3,6 +3,7 @@ package no.nav.personbruker.varseldb.api.varsel
 import io.ktor.application.*
 import io.ktor.request.*
 import io.ktor.routing.*
+import java.time.LocalDateTime
 
 fun Route.varselApi(
     service: VarselService
@@ -16,6 +17,7 @@ fun Route.varselApi(
 
 private fun varselMapper(varselDTO: VarselDTO): Varsel {
     return Varsel(
+        datoOpprettet = LocalDateTime.now(),
         aktoerId = varselDTO.aktoerId,
         varselId = varselDTO.varselId,
         meldingsType = varselDTO.varseltypeId,
