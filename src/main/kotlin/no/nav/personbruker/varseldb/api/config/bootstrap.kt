@@ -7,7 +7,6 @@ import io.ktor.routing.*
 import io.prometheus.client.hotspot.DefaultExports
 import no.nav.personbruker.varseldb.api.health.healthApi
 import no.nav.personbruker.varseldb.api.varsel.varselApi
-import no.nav.tms.token.support.azure.validation.AzureAuthenticator
 import no.nav.tms.token.support.azure.validation.installAzureAuth
 
 fun Application.mainModule(appContext: ApplicationContext = ApplicationContext()) {
@@ -25,7 +24,7 @@ fun Application.mainModule(appContext: ApplicationContext = ApplicationContext()
 
     routing {
         healthApi(appContext.healthService)
-        authenticate(AzureAuthenticator.name) {
+        authenticate {
             varselApi(appContext.varselService)
         }
     }
