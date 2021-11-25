@@ -2,6 +2,11 @@
  * Anbefalte versjoner av tredjepartsbiblioteker.
  */
 
+object H2Database {
+    private const val version = "1.4.200"
+    const val h2 = "com.h2database:h2:$version"
+}
+
 object DittNAV {
     object Common {
         private const val version = "2021.05.18-12.42-9ba5c329c21d"

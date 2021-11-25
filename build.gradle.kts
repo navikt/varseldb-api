@@ -46,7 +46,7 @@ dependencies {
 
     runtimeOnly("com.oracle.ojdbc:ojdbc10:19.3.0.0")
 
-
+    testImplementation(H2Database.h2)
     testImplementation(Junit.api)
     testImplementation(Ktor.clientMock)
     testImplementation(Ktor.clientMockJvm)

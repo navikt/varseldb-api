@@ -3,30 +3,26 @@ package no.nav.personbruker.varseldb.api.varsel
 import java.sql.*
 
 private val createQuery = """INSERT INTO VARSEL(AKTOER_ID, VARSELTEKST, DATO_OPPRETTET, URL, MELDINGS_TYPE, DATO_LEST, VARSEL_ID)
-            VALUES (?, ?, ?, ?, ?, ?, ?)"""
+    |VALUES (?, ?, ?, ?, ?, ?, ?)""".trimMargin()
 private val getQuery = """SELECT * FROM VARSEL WHERE VARSEL_ID = ?"""
 
+
 fun Connection.createVarsel(varsel: Varsel): Int =
-    executePersistQuery(createQuery) {
-        buildStatementForSingleRow(varsel)
+    prepareStatement(createQuery, Statement.RETURN_GENERATED_KEYS).use {
+        it.buildStatementForSingleRow(varsel)
+        it.executeUpdate()
+        it.generatedKeys.getInt("id")
     }
+
 
 fun Connection.getVarselByVarselId(varselId: String): Varsel? =
     prepareStatement(getQuery)
         .use {
             it.setString(1, varselId)
-            it.executeQuery().singleResult() {
+            it.executeQuery().singleResult {
                 toVarsel()
             }
         }
-
-private fun Connection.executePersistQuery(sql: String, paramInit: PreparedStatement.() -> Unit): Int {
-    return prepareStatement("""$sql ON CONFLICT DO NOTHING""", Statement.RETURN_GENERATED_KEYS).use {
-        it.paramInit()
-        it.executeUpdate()
-        it.generatedKeys.getInt("id")
-    }
-}
 
 private fun PreparedStatement.buildStatementForSingleRow(varsel: Varsel) {
     setString(1, varsel.aktoerId)
