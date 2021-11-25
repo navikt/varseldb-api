@@ -42,7 +42,7 @@ dependencies {
     implementation(Prometheus.common)
     implementation(Prometheus.hotspot)
     implementation(Prometheus.logback)
-    implementation("com.github.navikt.tms-ktor-token-support:token-support-azure-validation:2021.11.25-azure-proxy")
+    implementation(Tms.KtorTokenSupport.azureValidation)
 
     runtimeOnly("com.oracle.ojdbc:ojdbc10:19.3.0.0")
 

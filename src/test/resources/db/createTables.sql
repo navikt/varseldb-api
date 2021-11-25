@@ -1,8 +1,6 @@
 create table if not exists varsel
 (
-    ID serial not null
-        constraint varsel_pkey
-        primary key,
+    ID identity not null primary key,
     AKTOER_ID       varchar(255) not null,
     VARSELTEKST     clob not null,
     DATO_OPPRETTET  timestamp not null,

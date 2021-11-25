@@ -18,9 +18,9 @@ fun Route.varselApi(
 private fun varselMapper(varselDTO: VarselDTO): Varsel {
     return Varsel(
         datoOpprettet = LocalDateTime.now(),
-        aktoerId = varselDTO.aktoerId,
-        varselId = varselDTO.varselId,
-        meldingsType = varselDTO.varseltypeId,
+        aktoerid = varselDTO.aktoerId,
+        varselid = varselDTO.varselId,
+        meldingstype = varselDTO.varseltypeId,
         varseltekst = varselDTO.varseltekst,
         url = varselDTO.varselURL
     )

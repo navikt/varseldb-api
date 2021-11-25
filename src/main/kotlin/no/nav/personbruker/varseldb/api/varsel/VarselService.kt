@@ -10,14 +10,14 @@ class VarselService(private val database: Database) {
 
     suspend fun createVarsel(varsel: Varsel) {
         val dbQuery = database.dbQuery {
-            getVarselByVarselId(varsel.varselId)
+            getVarselByVarselid(varsel.varselid)
         }
         if(dbQuery != null) {
             database.dbQuery {
                 createVarsel(varsel)
             }
         } else {
-            log.warn("Varsel med varsel-id: ${varsel.varselId} finnes allerede i databasen. Varselet blir ikke lagret.")
+            log.warn("Varsel med varsel-id: ${varsel.varselid} finnes allerede i databasen. Varselet blir ikke lagret.")
         }
     }
 }

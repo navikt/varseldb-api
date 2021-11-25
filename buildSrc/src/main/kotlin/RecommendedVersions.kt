@@ -113,7 +113,7 @@ object Shadow {
 
 object Tms {
     object KtorTokenSupport {
-        private const val version = "2021.11.03-09.32-8cc687403bfe"
+        private const val version = "2021.11.25-12.24-895cf154b0ec"
         private const val groupId = "com.github.navikt.tms-ktor-token-support"
 
         const val azureValidation = "$groupId:token-support-azure-validation:$version"

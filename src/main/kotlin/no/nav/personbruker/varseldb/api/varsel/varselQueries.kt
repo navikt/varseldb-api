@@ -11,11 +11,14 @@ fun Connection.createVarsel(varsel: Varsel): Int =
     prepareStatement(createQuery, Statement.RETURN_GENERATED_KEYS).use {
         it.buildStatementForSingleRow(varsel)
         it.executeUpdate()
-        it.generatedKeys.getInt("id")
+        if(it.generatedKeys.next()) {
+            it.generatedKeys.getInt("id")
+        } else {
+            -1
+        }
     }
 
-
-fun Connection.getVarselByVarselId(varselId: String): Varsel? =
+fun Connection.getVarselByVarselid(varselId: String): Varsel? =
     prepareStatement(getQuery)
         .use {
             it.setString(1, varselId)
@@ -25,22 +28,23 @@ fun Connection.getVarselByVarselId(varselId: String): Varsel? =
         }
 
 private fun PreparedStatement.buildStatementForSingleRow(varsel: Varsel) {
-    setString(1, varsel.aktoerId)
+    setString(1, varsel.aktoerid)
     setString(2, varsel.varseltekst)
     setObject(3, varsel.datoOpprettet, Types.TIMESTAMP)
     setString(4, varsel.url)
-    setString(5, varsel.meldingsType)
+    setString(5, varsel.meldingstype)
     setObject(6, varsel.datoLest)
-    setString(7, varsel.varselId)
+    setString(7, varsel.varselid)
 }
 
 private fun ResultSet.toVarsel(): Varsel {
     return Varsel(
+        id = getInt("ID"),
         datoOpprettet = getTimestamp("DATO_OPPRETTET").toLocalDateTime(),
         datoLest = getTimestamp("DATO_OPPRETTET")?.toLocalDateTime(),
-        aktoerId = getString("AKTOER_ID"),
-        varselId = getString("VARSEL_ID"),
-        meldingsType = getString("MELDINGS_TYPE"),
+        aktoerid = getString("AKTOER_ID"),
+        varselid = getString("VARSEL_ID"),
+        meldingstype = getString("MELDINGS_TYPE"),
         varseltekst = getString("VARSELTEKST"),
         url = getString("URL")
     )
