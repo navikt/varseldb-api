@@ -18,6 +18,7 @@ fun Application.mainModule(appContext: ApplicationContext = ApplicationContext()
 
     installAzureAuth {
         setAsDefault = true
+        enableDefaultProxy = true
     }
 
     install(ContentNegotiation)
