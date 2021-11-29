@@ -33,6 +33,9 @@ spec:
       rules:
         - application: varseltjeneste-dittnav
           namespace: teamdokumenthandtering
+        - application: tms-azure-test-dummy
+          namespace: min-side
+          cluster: dev-gcp
   resources:
     limits:
       cpu: "3"
