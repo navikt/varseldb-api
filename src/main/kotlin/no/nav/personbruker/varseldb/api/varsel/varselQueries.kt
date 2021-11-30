@@ -8,11 +8,11 @@ private val getQuery = """SELECT * FROM VARSEL WHERE VARSEL_ID = ?"""
 
 
 fun Connection.createVarsel(varsel: Varsel): Int =
-    prepareStatement(createQuery, Statement.RETURN_GENERATED_KEYS).use {
+    prepareStatement(createQuery, arrayOf("ID")).use {
         it.buildStatementForSingleRow(varsel)
         it.executeUpdate()
         if(it.generatedKeys.next()) {
-            it.generatedKeys.getInt("id")
+            it.generatedKeys.getInt(1)
         } else {
             -1
         }

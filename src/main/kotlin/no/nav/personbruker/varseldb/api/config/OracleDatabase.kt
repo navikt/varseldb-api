@@ -24,7 +24,7 @@ class OracleDatabase(env: Environment) : Database {
     companion object {
         private fun hikariCommonConfig(env: Environment): HikariConfig {
             val config = HikariConfig()
-            config.driverClassName = "oracle.jdbc.driver.OracleDriver"
+            config.driverClassName = "oracle.jdbc.OracleDriver"
             config.jdbcUrl = env.dbUrl
             config.minimumIdle = 0
             config.maxLifetime = 1800000
