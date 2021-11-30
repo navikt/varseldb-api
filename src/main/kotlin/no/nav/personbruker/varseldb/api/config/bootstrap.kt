@@ -4,6 +4,7 @@ import io.ktor.application.*
 import io.ktor.auth.*
 import io.ktor.features.*
 import io.ktor.routing.*
+import io.ktor.serialization.*
 import io.prometheus.client.hotspot.DefaultExports
 import no.nav.personbruker.varseldb.api.health.healthApi
 import no.nav.personbruker.varseldb.api.varsel.varselApi
@@ -20,7 +21,9 @@ fun Application.mainModule(appContext: ApplicationContext = ApplicationContext()
         enableDefaultProxy = true
     }
 
-    install(ContentNegotiation)
+    install(ContentNegotiation) {
+        json()
+    }
 
     routing {
         healthApi(appContext.healthService)
