@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class VarselQueriesTest {
+internal class VarselQueriesTest {
 
     private val database = H2Database()
 
@@ -24,26 +24,26 @@ class VarselQueriesTest {
     fun `Should create Varsel`() {
         runBlocking {
             database.dbQuery {
-                createVarsel(VarselObjectMother.createVarselWithVarselid("varselid1"))
-                createVarsel(VarselObjectMother.createVarselWithVarselid("varselid2"))
-                createVarsel(VarselObjectMother.createVarselWithVarselid("varselid3"))
+                createVarsel(VarselObjectMother.createVarsel(varselId = "varselId1"))
+                createVarsel(VarselObjectMother.createVarsel(varselId = "varselId2"))
+                createVarsel(VarselObjectMother.createVarsel(varselId = "varselId3"))
             }
-            val varselWithVarselid = database.dbQuery { getVarselByVarselid("varselid3") }
-            varselWithVarselid?.varselid `should be equal to` "varselid3"
+            val varselWithVarselid = database.dbQuery { getVarselByVarselid("varselId3") }
+            varselWithVarselid?.varselId `should be equal to` "varselId3"
         }
     }
 
     @Test
-    fun `Should return Varsel with varselid`() {
-        val varselToPersist = VarselObjectMother.createVarselWithVarselid("varselid4")
+    fun `Should return Varsel with varselId`() {
+        val varselToPersist = VarselObjectMother.createVarsel(varselId = "varselId4")
         runBlocking {
             database.dbQuery {
                 createVarsel(varselToPersist)
             }
-            val varselWithVarselid = database.dbQuery { getVarselByVarselid("varselid4") }
-            varselToPersist.varselid `should be equal to` varselWithVarselid?.varselid
+            val varselWithVarselid = database.dbQuery { getVarselByVarselid("varselId4") }
+            varselToPersist.varselId `should be equal to` varselWithVarselid?.varselId
             varselToPersist.varseltekst `should be equal to` varselWithVarselid?.varseltekst
-            varselToPersist.aktoerid `should be equal to` varselWithVarselid?.aktoerid
+            varselToPersist.aktoerId `should be equal to` varselWithVarselid?.aktoerId
             varselToPersist.datoOpprettet `should be equal to` varselWithVarselid?.datoOpprettet
             varselToPersist.meldingstype `should be equal to` varselWithVarselid?.meldingstype
             varselToPersist.url `should be equal to` varselWithVarselid?.url
@@ -51,7 +51,7 @@ class VarselQueriesTest {
     }
 
     @Test
-    fun `Should return null if Varsel with varselid is not found`() {
+    fun `Should return null if Varsel with varselId is not found`() {
         runBlocking {
             val emptyVarsel = database.dbQuery { getVarselByVarselid("unknown") }
             emptyVarsel.`should be null`()

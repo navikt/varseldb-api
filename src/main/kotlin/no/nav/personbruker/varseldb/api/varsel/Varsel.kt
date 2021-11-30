@@ -1,29 +1,30 @@
 package no.nav.personbruker.varseldb.api.varsel
 
+import java.net.URL
 import java.time.LocalDateTime
 
 data class Varsel(
     val id: Int?,
     val datoOpprettet: LocalDateTime,
     val datoLest: LocalDateTime? = null,
-    val aktoerid: String,
-    val varselid: String,
+    val aktoerId: String,
+    val varselId: String,
     val meldingstype: String,
     val varseltekst: String,
-    val url: String
+    val url: URL
 ) {
     constructor(
         datoOpprettet: LocalDateTime,
-        aktoerid: String,
-        varselid: String,
+        aktoerId: String,
+        varselId: String,
         meldingstype: String,
         varseltekst: String,
-        url: String
+        url: URL
     ) : this(id = null,
         datoOpprettet = datoOpprettet,
         datoLest = null,
-        aktoerid = aktoerid,
-        varselid = varselid,
+        aktoerId = aktoerId,
+        varselId = varselId,
         meldingstype = meldingstype,
         varseltekst = varseltekst,
         url = url

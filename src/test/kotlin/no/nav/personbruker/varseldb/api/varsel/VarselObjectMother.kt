@@ -1,36 +1,25 @@
 package no.nav.personbruker.varseldb.api.varsel
 
+import java.net.URL
 import java.time.LocalDateTime
 
 object VarselObjectMother {
 
-    private val defaultDatoOpprettet = LocalDateTime.now()
-    private val defaultAktoerid = "00001234"
-    private val defaultVarselid = "varsel-id-1"
-    private val defaultMeldingstype = "SPORSMAL"
-    private val defaultVarseltekst = "Du har fått et spørsmål fra NAV"
-    private val defaultUrl = "https://www.nav.no"
-
-
-    fun createVarsel(): Varsel {
+    fun createVarsel(
+        datoOpprettet: LocalDateTime = LocalDateTime.now(),
+        aktoerId: String = "00001234",
+        varselId: String = "varsel-id-1",
+        meldingstype: String = "SPORSMAL",
+        varseltekst: String = "Du har fått et spørsmål fra NAV",
+        url: URL = URL("https://www.nav.no")
+    ): Varsel {
         return Varsel(
-            datoOpprettet = defaultDatoOpprettet,
-            aktoerid = defaultAktoerid,
-            varselid = defaultVarselid,
-            meldingstype = defaultMeldingstype,
-            varseltekst = defaultVarseltekst,
-            url = defaultUrl
-        )
-    }
-
-    fun createVarselWithVarselid(varselid: String): Varsel {
-        return Varsel(
-            datoOpprettet = defaultDatoOpprettet,
-            aktoerid = defaultAktoerid,
-            varselid = varselid,
-            meldingstype = defaultMeldingstype,
-            varseltekst = defaultVarseltekst,
-            url = defaultUrl
+            datoOpprettet = datoOpprettet,
+            aktoerId = aktoerId,
+            varselId = varselId,
+            meldingstype = meldingstype,
+            varseltekst = varseltekst,
+            url = url
         )
     }
 }

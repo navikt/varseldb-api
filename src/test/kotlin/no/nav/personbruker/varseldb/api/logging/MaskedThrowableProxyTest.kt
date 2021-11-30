@@ -8,7 +8,8 @@ import org.amshove.kluent.`should not contain`
 import org.junit.jupiter.api.Test
 import java.io.IOException
 
-class MaskedThrowableProxyTest {
+internal class MaskedThrowableProxyTest {
+
     @Test
     fun `sjekk at maskering av fodselsnummer skjer ved kastet feil`() {
         val sensitiveException = RuntimeException(

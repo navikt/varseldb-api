@@ -4,14 +4,17 @@ import ch.qos.logback.classic.Logger
 import ch.qos.logback.classic.spi.ILoggingEvent
 import ch.qos.logback.core.read.ListAppender
 import kotlinx.coroutines.runBlocking
+import no.nav.personbruker.varseldb.api.common.`with message containing`
 import no.nav.personbruker.varseldb.api.common.database.H2Database
+import no.nav.personbruker.varseldb.api.common.exception.DuplicateVarselException
 import org.amshove.kluent.`should be equal to`
-import org.amshove.kluent.`should contain`
+import org.amshove.kluent.`should throw`
+import org.amshove.kluent.invoking
 import org.junit.jupiter.api.*
 import org.slf4j.LoggerFactory
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class VarselServiceTest {
+internal class VarselServiceTest {
 
     private val database = H2Database()
     private val varselService = VarselService(database)
@@ -38,13 +41,14 @@ class VarselServiceTest {
                 deleteAllVarsel()
             }
         }
+
     }
 
     @Test
     fun `Should persist each new Varsel`() {
-        val varsel1 = VarselObjectMother.createVarselWithVarselid("1")
-        val varsel2 = VarselObjectMother.createVarselWithVarselid("2")
-        val varsel3 = VarselObjectMother.createVarselWithVarselid("3")
+        val varsel1 = VarselObjectMother.createVarsel(varselId = "1")
+        val varsel2 = VarselObjectMother.createVarsel(varselId = "2")
+        val varsel3 = VarselObjectMother.createVarsel(varselId = "3")
         runBlocking {
             varselService.createVarsel(varsel1)
             varselService.createVarsel(varsel2)
@@ -57,32 +61,20 @@ class VarselServiceTest {
     }
 
     @Test
-    fun `Should not persist Varsel with varselid already present in DB`() {
+    fun `Should throw exeption if Varsel with varselId is already persisted in DB`() {
         val duplicateVarselId = "duplicateVarsel"
-        val newVarsel = VarselObjectMother.createVarselWithVarselid(duplicateVarselId)
-        val existingVarsel = VarselObjectMother.createVarselWithVarselid(duplicateVarselId)
+        val newVarsel = VarselObjectMother.createVarsel(varselId = duplicateVarselId)
+        val existingVarsel = VarselObjectMother.createVarsel(varselId = duplicateVarselId)
         runBlocking {
             varselService.createVarsel(newVarsel)
-            varselService.createVarsel(existingVarsel)
+            invoking {
+                runBlocking { varselService.createVarsel(existingVarsel) }
+            } `should throw` DuplicateVarselException::class `with message containing` "Varsel med varsel-id: $duplicateVarselId finnes allerede i databasen."
             val allVarsel = database.dbQuery {
                 getAllVarsel()
             }
             allVarsel.size `should be equal to` 1
-            allVarsel[0].varselid `should be equal to` duplicateVarselId
+            allVarsel[0].varselId `should be equal to` duplicateVarselId
         }
-    }
-
-    @Test
-    fun `Should log warning if Varsel with existing varselid is persisted`() {
-        val duplicateVarselId = "duplicateVarsel"
-        val newVarsel = VarselObjectMother.createVarselWithVarselid(duplicateVarselId)
-        val existingVarsel = VarselObjectMother.createVarselWithVarselid(duplicateVarselId)
-        runBlocking {
-            varselService.createVarsel(newVarsel)
-            varselService.createVarsel(existingVarsel)
-        }
-        val logevent = appender.list.first()
-        logevent.level.levelStr `should be equal to` "WARN"
-        logevent.formattedMessage `should contain` "Varsel med varsel-id: $duplicateVarselId finnes allerede i databasen."
     }
 }

@@ -1,5 +1,7 @@
 package no.nav.personbruker.varseldb.api.varsel
 
+import no.nav.personbruker.varseldb.api.common.validation.toUrl
+import no.nav.personbruker.varseldb.api.common.validation.validateMaxLength
 import java.time.LocalDateTime
 
 object VarselTransformer {
@@ -7,11 +9,11 @@ object VarselTransformer {
     fun fromDTO(varselDTO: VarselDTO): Varsel {
         return Varsel(
             datoOpprettet = LocalDateTime.now(),
-            aktoerid = varselDTO.aktoerId,
-            varselid = varselDTO.varselId,
-            meldingstype = varselDTO.varseltypeId,
+            aktoerId = validateMaxLength(varselDTO.aktoerId, "aktoerId", 255),
+            varselId = validateMaxLength(varselDTO.varselId, "varselId", 255),
+            meldingstype = validateMaxLength(varselDTO.varseltypeId, "meldingstype", 255),
             varseltekst = varselDTO.varseltekst,
-            url = varselDTO.varselURL
+            url = toUrl(varselDTO.varselURL, "varselURL")
         )
     }
 }

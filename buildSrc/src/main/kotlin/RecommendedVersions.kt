@@ -1,12 +1,6 @@
 /**
  * Anbefalte versjoner av tredjepartsbiblioteker.
  */
-
-object H2Database {
-    private const val version = "1.4.200"
-    const val h2 = "com.h2database:h2:$version"
-}
-
 object DittNAV {
     object Common {
         private const val version = "2021.05.18-12.42-9ba5c329c21d"
@@ -14,6 +8,11 @@ object DittNAV {
 
         const val utils = "$groupId:dittnav-common-utils:$version"
     }
+}
+
+object H2Database {
+    private const val version = "1.4.200"
+    const val h2 = "com.h2database:h2:$version"
 }
 
 object Hikari {
@@ -27,7 +26,6 @@ object Junit {
 
     const val api = "$groupId:junit-jupiter-api:$version"
     const val engine = "$groupId:junit-jupiter-engine:$version"
-    const val params = "$groupId:junit-jupiter-params:$version"
 }
 
 
@@ -47,34 +45,15 @@ object Kotlinx {
     private const val groupId = "org.jetbrains.kotlinx"
 
     const val coroutines = "$groupId:kotlinx-coroutines-core:1.5.2"
-    const val htmlJvm = "$groupId:kotlinx-html-jvm:0.7.2"
-}
-
-object Kotest {
-    const val version = "4.6.3"
-    private const val groupId = "io.kotest"
-
-    const val runnerJunit5 = "$groupId:kotest-runner-junit5:$version"
-    const val assertionsCore = "$groupId:kotest-assertions-core:$version"
-    const val extensions = "$groupId:kotest-extensions:$version"
 }
 
 object Ktor {
     const val version = "1.6.5"
     private const val groupId = "io.ktor"
 
-    const val auth = "$groupId:ktor-auth:$version"
     const val authJwt = "$groupId:ktor-auth-jwt:$version"
     const val htmlBuilder = "$groupId:ktor-html-builder:$version"
-    const val jackson = "$groupId:ktor-jackson:$version"
-    const val serverNetty = "$groupId:ktor-server-netty:$version"
-    const val clientApache = "$groupId:ktor-client-apache:$version"
-    const val clientJson = "$groupId:ktor-client-json:$version"
     const val clientSerializationJvm = "$groupId:ktor-client-serialization-jvm:$version"
-    const val clientLogging = "$groupId:ktor-client-logging:$version"
-    const val clientLoggingJvm = "$groupId:ktor-client-logging-jvm:$version"
-    const val clientMock = "$groupId:ktor-client-mock:$version"
-    const val clientMockJvm = "$groupId:ktor-client-mock-jvm:$version"
     const val serialization = "$groupId:ktor-serialization:$version"
 }
 
@@ -95,15 +74,20 @@ object Mockk {
     const val mockk = "io.mockk:mockk:$version"
 }
 
+object Oracle {
+    private const val version = "19.3.0.0"
+    private const val groupId = "com.oracle.ojdbc"
+
+    const val ojdbc10 = "$groupId:ojdbc10:$version"
+}
+
 object Prometheus {
     private const val version = "0.9.0"
     private const val groupId = "io.prometheus"
 
     const val common = "$groupId:simpleclient_common:$version"
     const val hotspot = "$groupId:simpleclient_hotspot:$version"
-    const val httpServer = "$groupId:simpleclient_httpserver:$version"
     const val logback = "$groupId:simpleclient_logback:$version"
-    const val simpleClient = "$groupId:simpleclient:$version"
 }
 
 object Shadow {

@@ -1,12 +1,9 @@
 package no.nav.personbruker.varseldb.api.varsel
 
 import no.nav.personbruker.varseldb.api.common.database.Database
-import org.slf4j.Logger
-import org.slf4j.LoggerFactory
+import no.nav.personbruker.varseldb.api.common.exception.DuplicateVarselException
 
 class VarselService(private val database: Database) {
-
-    private val log: Logger = LoggerFactory.getLogger(VarselService::class.java)
 
     suspend fun createVarsel(varsel: Varsel) {
         if(!varselAlreadyExists(varsel)) {
@@ -14,14 +11,15 @@ class VarselService(private val database: Database) {
                 createVarsel(varsel)
             }
         } else {
-            log.warn("Varsel med varsel-id: ${varsel.varselid} finnes allerede i databasen. Varselet blir ikke lagret.")
+            val message = "Varsel med varsel-id: ${varsel.varselId} finnes allerede i databasen. Varselet blir ikke lagret."
+            throw DuplicateVarselException(message)
         }
     }
 
     private suspend fun varselAlreadyExists(varsel: Varsel): Boolean {
-        val dbQuery = database.dbQuery {
-            getVarselByVarselid(varsel.varselid)
+        val existingVarsel = database.dbQuery {
+            getVarselByVarselid(varsel.varselId)
         }
-        return dbQuery != null
+        return existingVarsel != null
     }
 }

@@ -3,6 +3,7 @@ package no.nav.personbruker.varseldb.api.common.database
 import com.zaxxer.hikari.HikariDataSource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import no.nav.personbruker.varseldb.api.common.exception.DatabaseException
 import no.nav.personbruker.varseldb.api.health.HealthCheck
 import no.nav.personbruker.varseldb.api.health.HealthStatus
 import no.nav.personbruker.varseldb.api.health.Status
@@ -22,13 +23,13 @@ interface Database : HealthCheck {
                     openConnection.commit()
                 }
 
-            } catch (e: Exception) {
+            } catch (exception: Exception) {
                 try {
                     openConnection.rollback()
                 } catch (rollbackException: Exception) {
-                    e.addSuppressed(rollbackException)
+                    exception.addSuppressed(rollbackException)
                 }
-                throw e
+                throw DatabaseException("Det skjedde en feil ved kjøring av db-spørring.", exception)
             }
         }
     }
