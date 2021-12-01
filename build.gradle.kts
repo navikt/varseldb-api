@@ -32,6 +32,7 @@ dependencies {
     implementation(Ktor.authJwt)
     implementation(Ktor.htmlBuilder)
     implementation(Ktor.serialization)
+    implementation(Ktor.serverNetty)
     implementation(Logback.classic)
     implementation(Logstash.logbackEncoder)
     implementation(Prometheus.common)

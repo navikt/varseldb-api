@@ -55,6 +55,7 @@ object Ktor {
     const val htmlBuilder = "$groupId:ktor-html-builder:$version"
     const val clientSerializationJvm = "$groupId:ktor-client-serialization-jvm:$version"
     const val serialization = "$groupId:ktor-serialization:$version"
+    const val serverNetty = "$groupId:ktor-server-netty:$version"
 }
 
 object Logback {
