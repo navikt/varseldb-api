@@ -21,9 +21,18 @@ spec:
     min: 2
     max: 4
   ingresses:
-    - "https://dev.intern.nav.no/varseldb-api"
+    - "https://varseldb-api.dev.intern.nav.no/"
   vault:
     enabled: true
+  azure:
+    application:
+      enabled: true
+  webproxy: true
+  accessPolicy:
+    inbound:
+      rules:
+        - application: varseltjeneste-dittnav
+          namespace: teamdokumenthandtering
   resources:
     limits:
       cpu: "3"

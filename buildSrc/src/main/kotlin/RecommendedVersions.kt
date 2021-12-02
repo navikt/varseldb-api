@@ -1,34 +1,23 @@
 /**
  * Anbefalte versjoner av tredjepartsbiblioteker.
  */
+object DittNAV {
+    object Common {
+        private const val version = "2021.05.18-12.42-9ba5c329c21d"
+        private const val groupId = "com.github.navikt.dittnav-common-lib"
 
-object Auth0 {
-    private const val version = "3.11.0"
-    const val javajwt = "com.auth0:java-jwt:$version"
+        const val utils = "$groupId:dittnav-common-utils:$version"
+    }
 }
 
-object Bouncycastle {
-    private const val version = "1.66"
-    const val bcprovJdk15on = "org.bouncycastle:bcprov-jdk15on:$version"
+object H2Database {
+    private const val version = "1.4.200"
+    const val h2 = "com.h2database:h2:$version"
 }
 
-object GraphQL {
-    const val version = "3.7.0"
-    private const val groupId = "com.expediagroup"
-    const val pluginId = "com.expediagroup.graphql"
-
-    const val client = "$groupId:graphql-kotlin-client:$version"
-}
-
-object Influxdb {
-    private const val version = "2.20"
-    const val java = "org.influxdb:influxdb-java:$version"
-}
-
-object Jackson {
-    private const val version = "2.12.1"
-    const val dataTypeJsr310 = "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$version"
-    const val moduleKotlin = "com.fasterxml.jackson.module:jackson-module-kotlin:$version"
+object Hikari {
+    private const val version = "5.0.0"
+    const val cp = "com.zaxxer:HikariCP:$version"
 }
 
 object Junit {
@@ -37,17 +26,8 @@ object Junit {
 
     const val api = "$groupId:junit-jupiter-api:$version"
     const val engine = "$groupId:junit-jupiter-engine:$version"
-    const val params = "$groupId:junit-jupiter-params:$version"
 }
 
-object Jjwt {
-    private const val version = "0.11.2"
-    private const val groupId = "io.jsonwebtoken"
-
-    const val api = "$groupId:jjwt-api:$version"
-    const val impl = "$groupId:jjwt-impl:$version"
-    const val jackson = "$groupId:jjwt-jackson:$version"
-}
 
 object Kluent {
     private const val version = "1.68"
@@ -65,37 +45,17 @@ object Kotlinx {
     private const val groupId = "org.jetbrains.kotlinx"
 
     const val coroutines = "$groupId:kotlinx-coroutines-core:1.5.2"
-    const val htmlJvm = "$groupId:kotlinx-html-jvm:0.7.2"
-}
-
-object Kotest {
-    const val version = "4.6.3"
-    private const val groupId = "io.kotest"
-
-    const val runnerJunit5 = "$groupId:kotest-runner-junit5:$version"
-    const val assertionsCore = "$groupId:kotest-assertions-core:$version"
-    const val extensions = "$groupId:kotest-extensions:$version"
 }
 
 object Ktor {
     const val version = "1.6.5"
     private const val groupId = "io.ktor"
 
-    const val auth = "$groupId:ktor-auth:$version"
     const val authJwt = "$groupId:ktor-auth-jwt:$version"
     const val htmlBuilder = "$groupId:ktor-html-builder:$version"
-    const val http = "$groupId:ktor-http-jvm:$version"
-    const val jackson = "$groupId:ktor-jackson:$version"
-    const val serverNetty = "$groupId:ktor-server-netty:$version"
-    const val clientApache = "$groupId:ktor-client-apache:$version"
-    const val clientJson = "$groupId:ktor-client-json:$version"
     const val clientSerializationJvm = "$groupId:ktor-client-serialization-jvm:$version"
-    const val clientJackson = "$groupId:ktor-client-jackson:$version"
-    const val clientLogging = "$groupId:ktor-client-logging:$version"
-    const val clientLoggingJvm = "$groupId:ktor-client-logging-jvm:$version"
-    const val clientMock = "$groupId:ktor-client-mock:$version"
-    const val clientMockJvm = "$groupId:ktor-client-mock-jvm:$version"
-    const val serverTestHost = "$groupId:ktor-server-test-host:$version"
+    const val serialization = "$groupId:ktor-serialization:$version"
+    const val serverNetty = "$groupId:ktor-server-netty:$version"
 }
 
 object Logback {
@@ -115,16 +75,11 @@ object Mockk {
     const val mockk = "io.mockk:mockk:$version"
 }
 
-object NAV {
-    const val vaultJdbc = "no.nav:vault-jdbc:1.3.7"
-    const val kafkaEmbedded = "no.nav:kafka-embedded-env:2.5.0"
-    const val tokenValidatorKtor = "no.nav.security:token-validation-ktor:1.3.0"
-    const val customKtorCorsFeature = "com.github.navikt:wildcard-subdomain-ktor-cors-feature:2020.11.03-14.59-81af587291fd"
-}
+object Oracle {
+    private const val version = "19.3.0.0"
+    private const val groupId = "com.oracle.ojdbc"
 
-object Postgresql {
-    private const val version = "42.2.16"
-    const val postgresql = "org.postgresql:postgresql:$version"
+    const val ojdbc10 = "$groupId:ojdbc10:$version"
 }
 
 object Prometheus {
@@ -133,9 +88,7 @@ object Prometheus {
 
     const val common = "$groupId:simpleclient_common:$version"
     const val hotspot = "$groupId:simpleclient_hotspot:$version"
-    const val httpServer = "$groupId:simpleclient_httpserver:$version"
     const val logback = "$groupId:simpleclient_logback:$version"
-    const val simpleClient = "$groupId:simpleclient:$version"
 }
 
 object Shadow {
@@ -143,36 +96,11 @@ object Shadow {
     const val pluginId = "com.github.johnrengelman.shadow"
 }
 
-object TestContainers {
-    private const val version = "1.15.0-rc2"
-    private const val groupId = "org.testcontainers"
-
-    const val junitJupiter = "$groupId:junit-jupiter:$version"
-    const val testContainers = "$groupId:testcontainers:$version"
-}
-
 object Tms {
     object KtorTokenSupport {
-        private const val version = "2021.09.15-12.26-2b3dd2a9ca44"
+        private const val version = "2021.11.25-12.24-895cf154b0ec"
         private const val groupId = "com.github.navikt.tms-ktor-token-support"
 
-        const val authenticationInstaller = "$groupId:token-support-authentication-installer:$version"
-        const val idporten = "$groupId:token-support-idporten:$version"
-        const val tokendingsExchange = "$groupId:token-support-tokendings-exchange:$version"
-        const val tokenXValidation = "$groupId:token-support-tokenx-validation:$version"
+        const val azureValidation = "$groupId:token-support-azure-validation:$version"
     }
-}
-
-object Unleash {
-    private const val version = "3.3.1"
-    private const val groupId = "no.finn.unleash"
-
-    const val clientJava = "$groupId:unleash-client-java:$version"
-}
-
-object Awaitility {
-    private const val version = "4.0.3"
-    private const val groupId = "org.awaitility"
-
-    const val awaitilityKotlin = "$groupId:awaitility-kotlin:$version"
 }

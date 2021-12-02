@@ -49,10 +49,6 @@ class MaskedLoggingEvent internal constructor(private val iLoggingEvent: ILoggin
         return iLoggingEvent.hasCallerData()
     }
 
-    override fun getMarker(): Marker? {
-        return iLoggingEvent.marker
-    }
-
     override fun getMarkerList(): MutableList<Marker>? {
         return iLoggingEvent.markerList
     }
