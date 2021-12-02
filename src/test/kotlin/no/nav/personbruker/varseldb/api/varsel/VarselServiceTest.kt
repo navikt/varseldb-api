@@ -7,6 +7,7 @@ import kotlinx.coroutines.runBlocking
 import no.nav.personbruker.varseldb.api.common.`with message containing`
 import no.nav.personbruker.varseldb.api.common.database.H2Database
 import no.nav.personbruker.varseldb.api.common.exception.DuplicateVarselException
+import no.nav.personbruker.varseldb.api.varsel.VarselDTOObjectMother.createVarselDTO
 import org.amshove.kluent.`should be equal to`
 import org.amshove.kluent.`should throw`
 import org.amshove.kluent.invoking
@@ -46,13 +47,13 @@ internal class VarselServiceTest {
 
     @Test
     fun `Should persist each new Varsel`() {
-        val varsel1 = VarselObjectMother.createVarsel(varselId = "1")
-        val varsel2 = VarselObjectMother.createVarsel(varselId = "2")
-        val varsel3 = VarselObjectMother.createVarsel(varselId = "3")
+        val varselDTO1 = createVarselDTO(varselId = "1")
+        val varselDTO2 = createVarselDTO(varselId = "2")
+        val varselDTO3 = createVarselDTO(varselId = "3")
         runBlocking {
-            varselService.createVarsel(varsel1)
-            varselService.createVarsel(varsel2)
-            varselService.createVarsel(varsel3)
+            varselService.createVarsel(varselDTO1)
+            varselService.createVarsel(varselDTO2)
+            varselService.createVarsel(varselDTO3)
             val allVarsel = database.dbQuery {
                 getAllVarsel()
             }
@@ -63,8 +64,8 @@ internal class VarselServiceTest {
     @Test
     fun `Should throw exeption if Varsel with varselId is already persisted in DB`() {
         val duplicateVarselId = "duplicateVarsel"
-        val newVarsel = VarselObjectMother.createVarsel(varselId = duplicateVarselId)
-        val existingVarsel = VarselObjectMother.createVarsel(varselId = duplicateVarselId)
+        val newVarsel = createVarselDTO(varselId = duplicateVarselId)
+        val existingVarsel = createVarselDTO(varselId = duplicateVarselId)
         runBlocking {
             varselService.createVarsel(newVarsel)
             invoking {

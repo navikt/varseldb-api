@@ -2,6 +2,7 @@ package no.nav.personbruker.varseldb.api.varsel
 
 import no.nav.personbruker.varseldb.api.common.`with message containing`
 import no.nav.personbruker.varseldb.api.common.exception.FieldValidationException
+import no.nav.personbruker.varseldb.api.varsel.VarselDTOObjectMother.createVarselDTO
 import org.amshove.kluent.`should be equal to`
 import org.amshove.kluent.`should throw`
 import org.amshove.kluent.invoking
@@ -57,20 +58,5 @@ internal class VarselTransformerTest {
         val varselDTO = createVarselDTO(varseltypeId = "OPPGAVE")
         val varsel = VarselTransformer.fromDTO(varselDTO)
         varsel.meldingstype `should be equal to` varselDTO.varseltypeId
-    }
-
-    private fun createVarselDTO(
-        aktoerId: String = "1234",
-        varselId: String = "abc123",
-        varseltypeId: String = "SPORSMAL",
-        varseltekst: String = "Spørsmål fra NAV",
-        varselURL: String = "https://www.nav.no"): VarselDTO {
-        return VarselDTO(
-            aktoerId = aktoerId,
-            varselId = varselId,
-            varseltypeId = varseltypeId,
-            varseltekst = varseltekst,
-            varselURL = varselURL
-        )
     }
 }

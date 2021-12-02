@@ -5,7 +5,8 @@ import no.nav.personbruker.varseldb.api.common.exception.DuplicateVarselExceptio
 
 class VarselService(private val database: Database) {
 
-    suspend fun createVarsel(varsel: Varsel) {
+    suspend fun createVarsel(varselDto: VarselDTO) {
+        val varsel = VarselTransformer.fromDTO(varselDto)
         if(!varselAlreadyExists(varsel)) {
             database.dbQuery {
                 createVarsel(varsel)
