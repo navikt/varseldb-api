@@ -28,7 +28,6 @@ object Junit {
     const val engine = "$groupId:junit-jupiter-engine:$version"
 }
 
-
 object Kluent {
     private const val version = "1.68"
     const val kluent = "org.amshove.kluent:kluent:$version"
