@@ -21,7 +21,7 @@ spec:
     min: 2
     max: 4
   ingresses:
-    - "https://varseldb-api.intern.nav.no/"
+    - "https://varseldb-api.intern.nav.no/varseldb-api"
   vault:
     enabled: true
   azure:
