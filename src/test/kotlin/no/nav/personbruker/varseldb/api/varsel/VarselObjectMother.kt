@@ -1,6 +1,5 @@
 package no.nav.personbruker.varseldb.api.varsel
 
-import java.net.URL
 import java.time.LocalDateTime
 
 object VarselObjectMother {
@@ -11,7 +10,7 @@ object VarselObjectMother {
         varselId: String = "varsel-id-1",
         meldingstype: String = "SPORSMAL",
         varseltekst: String = "Du har fått et spørsmål fra NAV",
-        url: URL = URL("https://www.nav.no")
+        url: String? = "www.nav.no"
     ): Varsel {
         return Varsel(
             datoOpprettet = datoOpprettet,

@@ -19,7 +19,7 @@ internal class VarselTransformerTest {
         varsel.aktoerId `should be equal to` varselDTO.aktoerId
         varsel.meldingstype `should be equal to` varselDTO.varseltypeId
         varsel.varseltekst `should be equal to` varselDTO.varseltekst
-        varsel.url.toString() `should be equal to` varselDTO.varselURL
+        varsel.url `should be equal to` varselDTO.varselURL
     }
 
     @Test
@@ -44,14 +44,6 @@ internal class VarselTransformerTest {
         invoking {
             VarselTransformer.fromDTO(varselDTO)
         } `should throw` FieldValidationException::class `with message containing` "meldingstype"
-    }
-
-    @Test
-    fun `Should throw exception if invalid URL`() {
-        val varselDTO = createVarselDTO(varselURL = "t")
-        invoking {
-            VarselTransformer.fromDTO(varselDTO)
-        } `should throw` FieldValidationException::class `with message containing` "url"
     }
 
     @Test

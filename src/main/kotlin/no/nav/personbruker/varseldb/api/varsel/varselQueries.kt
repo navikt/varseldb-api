@@ -1,7 +1,9 @@
 package no.nav.personbruker.varseldb.api.varsel
 
-import java.net.URL
-import java.sql.*
+import java.sql.Connection
+import java.sql.PreparedStatement
+import java.sql.ResultSet
+import java.sql.Types
 
 private val createQuery = """INSERT INTO VARSEL(AKTOER_ID, VARSELTEKST, DATO_OPPRETTET, URL, MELDINGS_TYPE, DATO_LEST, VARSEL_ID)
     |VALUES (?, ?, ?, ?, ?, ?, ?)""".trimMargin()
@@ -37,7 +39,7 @@ fun ResultSet.toVarsel(): Varsel {
         varselId = getString("VARSEL_ID"),
         meldingstype = getString("MELDINGS_TYPE"),
         varseltekst = getString("VARSELTEKST"),
-        url = URL(getString("URL"))
+        url = getString("URL")
     )
 }
 
