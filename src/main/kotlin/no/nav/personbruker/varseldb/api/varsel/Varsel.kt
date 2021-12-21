@@ -11,7 +11,7 @@ data class Varsel(
     val varselId: String,
     val meldingstype: String,
     val varseltekst: String,
-    val url: URL
+    val url: URL?
 ) {
     constructor(
         datoOpprettet: LocalDateTime,
@@ -19,7 +19,7 @@ data class Varsel(
         varselId: String,
         meldingstype: String,
         varseltekst: String,
-        url: URL
+        url: URL?
     ) : this(id = null,
         datoOpprettet = datoOpprettet,
         datoLest = null,

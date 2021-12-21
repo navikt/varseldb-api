@@ -11,9 +11,13 @@ fun validateMaxLength(field: String, fieldName: String, maxLength: Int): String 
     }
 }
 
-fun toUrl(field: String, fieldName: String): URL {
+fun toUrl(field: String?, fieldName: String): URL? {
     return try {
-        URL(field)
+        return if(!field.isNullOrBlank()) {
+            URL(field)
+        } else {
+            null
+        }
     } catch (exception: Exception) {
         throw FieldValidationException("Feltet $fieldName inneholdt ugyldig url.", exception)
     }

@@ -4,6 +4,7 @@ import no.nav.personbruker.varseldb.api.common.`with message containing`
 import no.nav.personbruker.varseldb.api.common.exception.FieldValidationException
 import no.nav.personbruker.varseldb.api.varsel.VarselDTOObjectMother.createVarselDTO
 import org.amshove.kluent.`should be equal to`
+import org.amshove.kluent.`should not throw`
 import org.amshove.kluent.`should throw`
 import org.amshove.kluent.invoking
 import org.junit.jupiter.api.Test
@@ -51,6 +52,22 @@ internal class VarselTransformerTest {
         invoking {
             VarselTransformer.fromDTO(varselDTO)
         } `should throw` FieldValidationException::class `with message containing` "url"
+    }
+
+    @Test
+    fun `Should handle empty URL`() {
+        val varselDTO = createVarselDTO(varselURL = "")
+        invoking {
+            VarselTransformer.fromDTO(varselDTO)
+        } `should not throw` FieldValidationException::class
+    }
+
+    @Test
+    fun `Should handle null URL`() {
+        val varselDTO = createVarselDTO(varselURL = null)
+        invoking {
+            VarselTransformer.fromDTO(varselDTO)
+        } `should not throw` FieldValidationException::class
     }
 
     @Test

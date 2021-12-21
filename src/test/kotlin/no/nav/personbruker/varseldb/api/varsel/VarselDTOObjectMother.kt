@@ -7,7 +7,7 @@ object VarselDTOObjectMother {
         varselId: String = "abc123",
         varseltypeId: String = "SPORSMAL",
         varseltekst: String = "Spørsmål fra NAV",
-        varselURL: String = "https://www.nav.no"): VarselDTO {
+        varselURL: String? = "https://www.nav.no"): VarselDTO {
         return VarselDTO(
             aktoerId = aktoerId,
             varselId = varselId,

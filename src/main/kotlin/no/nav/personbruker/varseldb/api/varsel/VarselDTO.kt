@@ -8,5 +8,5 @@ data class VarselDTO(
     val varselId: String,
     val varseltypeId: String,
     val varseltekst: String,
-    val varselURL: String
+    val varselURL: String?
 )
